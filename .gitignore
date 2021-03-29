@@ -1,0 +1,7 @@
+# 项目排除路径
+/ch01-hello-mybatis/target/
+/ch02-mybatis-dao/target/
+/ch03-mybatis-dao-proxy/target/
+/ch04-mybatis-parameter/target/
+/ch05-mybatis-return-result/target/
+/ch06-dynamic-sql/target/

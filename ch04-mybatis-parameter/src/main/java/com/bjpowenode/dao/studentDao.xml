@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- @-3
+【指定约束文件】
+【作用：限制/检查本文件中出现的标签，属性所符合MyBatis的要求】
+【约束文件名称】mybatis-3-mapper.dtd【扩展名为.dtd】
+-->
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--创建MyBatis使用配置文件【SQL映射文件】
+ 【写SQL语句】，一般一张表对应一个映射文件,
+ 由MyBatis执行-->
+
+<!--
+<Mapper>【映射】是当前文件的根标签。是必须存在的。
+其属性【namespace命名空间，是唯一值，并可自定义 的字符串】
+     【要求使用dao层 接口全限定名称】
+            特定标签标示 对数据库的特定操作
+<select>【查询】
+    【ID】属性是执行其操作的唯一标示
+    【resultType】SQL执行后的结果类型，遍历[ResultSet]所得JAVA对象的类型
+<update>【更新】
+<insert>【插入】
+<delete>【删除】
+-->
+<mapper namespace="com.bjpowenode.dao.StudentDao">
+    <!--查询操作-->
+    <!--parameterType="java.lang.Integer"
+    表示dao接口中方法参数的数据类型
+    值是JAVA数据类型全限定名称
+    或者是MyBatis所定义的别名
+    参数类型此属性 并非强制书写的 因为通过反射机制可发现接口中的方法参数类型
+    所以可以不写
+    使用【占位符】...#{任意字符} 是Mybatis使用JDBC中的preparedStatement 预编译清单对象
+    由Mybatis执行 连接对象的创建 预编译对象的创建 传参 执行sql 语句 封装为parameterType="java.lang.Integer"
+    -->
+    <select id="selectStudentByID" resultType="com.bjpowenode.entity.Student" parameterType="java.lang.Integer">
+        select *
+        from student
+        where id = #{id}
+    </select>
+    <!--多个参数，在接口使用 @Param对方法参数进行命名 在MAPPER中的占位符中引用命名-->
+    <select id="selectMultiParam" resultType="com.bjpowenode.entity.Student">
+        select *
+        from student
+        where name = #{human_name}
+           or age = #{human_age}
+    </select>
+    <!--多个参数，使用JAVA对象的属性值，作为参数的实际值
+    语法 所定义：   #{属性名1,javaTYPE="爪哇数据类型全限定名称",jdbcTYPE="设计表时的字段类型"}
+    where name = #{paramName,javaType="java.lang.String",jdbcType="VARCHAR"}
+           or age = #{paramAge,javaType="java.lang.Integer",jdbcType="INTEGER"}
+              *************************javaType jdbcType 值 反射可得 ***********************
+    -->
+    <select id="selectMultiObject" resultType="com.bjpowenode.entity.Student">
+        select *
+        from student
+        where name = #{paramName}
+           or age = #{paramAge}
+    </select>
+    <select id="selectMultiStudent" resultType="com.bjpowenode.entity.Student">
+        select *
+        from student
+        where name = #{name}
+           or age = #{age}
+    </select>
+    <select id="selectMultiPosition" resultType="com.bjpowenode.entity.Student">
+        select *
+        from student
+        where name = #{arg0}
+           or age = #{arg1}
+    </select>
+    <select id="selectMultiByMap" resultType="com.bjpowenode.entity.Student">
+        select *
+        from student
+        where name = #{sbname}
+           or age = #{sbage}
+    </select>
+    <select id="selectUse$" resultType="com.bjpowenode.entity.Student">
+        select *
+        from student
+        where name = ${stuname}
+    </select>
+    <select id="selectUse$Order" resultType="com.bjpowenode.entity.Student">
+        select *
+        from student
+        order by ${colAge}
+    </select>
+    <!--插入操作-->
+</mapper>

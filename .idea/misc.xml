@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/ch01-hello-mybatis/pom.xml" />
+        <option value="$PROJECT_DIR$/ch02-mybatis-dao/pom.xml" />
+        <option value="$PROJECT_DIR$/ch03-mybatis-dao-proxy/pom.xml" />
+        <option value="$PROJECT_DIR$/ch04-mybatis-parameter/pom.xml" />
+        <option value="$PROJECT_DIR$/ch05-mybatis-return-result/pom.xml" />
+        <option value="$PROJECT_DIR$/ch06-dynamic-sql/pom.xml" />
+        <option value="$PROJECT_DIR$/ch07-mybatis-generator-test/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_15" project-jdk-name="15 (2)" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>

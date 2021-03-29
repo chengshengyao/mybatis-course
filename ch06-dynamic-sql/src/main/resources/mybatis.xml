@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--文件约束说明-->
+<!--约束文件名：mybatis-3-config.dtd-->
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!--   @-4
+此文件为MyBatis的配置文件-->
+<configuration>
+    <!--指定MYSQL数据库连接的资源文件的地址：类路径的根目录下开始
+    resource 文件名
+    url 地址
+    -->
+    <properties resource="jdbc.properties"/>
+
+    <!--【settings】是控制MyBatis的全局行为-->
+    <settings>
+        <!--设置MyBatis打印日志在控制台-->
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+    </settings>
+    <!--!!!注意我在此处所犯错误 自定义别名标签是 在SETTING标签之后，有顺序的-->
+    <!--!!!定义别名!!!-->
+    <typeAliases>
+        <!--此处指定一个类型一个自定义别名-->
+        <typeAlias type="com.bjpowenode.vo.ViewStudent" alias="配置有序"/>
+        <!--typeAlias type="com.bjpowenode.entity.Student" alias="框架无敌"></typeAlias-->
+        <!--别名处理的第二种方式
+        抽象概念的打包效果： 将一个目录包装下的所有类 用直接类名表示别名 【非全限定类名】
+        -->
+        <package name="com.bjpowenode.entity"/>
+    </typeAliases>
+    <!--加入插件PageInterceptor【在MyBatis中进行了功能的扩展，分页查询】-->
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageInterceptor"/>
+    </plugins>
+    <!--环境配置：数据库连接信息【default与id相匹配】-->
+    <environments default="mydev">
+        <!--【id】唯一值-->
+        <environment id="mydev">
+            <!--【事务管理器】MyBatis的事务类型，JDBC中Connection对象的commit，rollback的事务处理-->
+            <transactionManager type="JDBC"/>
+            <!--数据源【连接对象】/连接数据库
+            java中规定 实现JAVAX.SQL.DATASOURCE接口的都是数据源
+            使用数据库连接池.MyBatis会PooledDataSource类-->
+            <dataSource type="POOLED">
+                <!--数据库驱动-->
+                <property name="driver" value="${jdbc.driver}"/>
+                <!--数据库url-->
+                <property name="url" value="${jdbc.url}"/>
+                <!--所访问数据库用户及密码-->
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <!--SQL mapper的位置-->
+    <mappers>
+        <!--可指定多个-->
+        <!--一个[mapper]指定一个文件的位置【类路径：target/classes】-->
+        <!--        <mapper resource="com/bjpowenode/dao/StudentDao.xml"/>-->
+        <!--        &lt;!&ndash;引入多个 sql mapper 文件&ndash;&gt;-->
+        <!--        <mapper resource="com/bjpowenode/dao/OrderDao.xml"/>-->
+        <!--使用package的要求
+        1.映射文件名与接口名相同
+        2.二者位于同一路径
+        -->
+        <package name="com.bjpowenode.dao"/>
+        <!--        <package name="com.bjpowenode.dao2"/>-->
+        <!--        <package name="com.bjpowenode.dao3"/>-->
+    </mappers>
+</configuration>

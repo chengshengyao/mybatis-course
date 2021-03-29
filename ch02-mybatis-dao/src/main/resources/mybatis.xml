@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--文件约束说明-->
+<!--约束文件名：mybatis-3-config.dtd-->
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!--   @-4
+此文件为MyBatis的配置文件-->
+<configuration>
+    <!--【settings】是控制MyBatis的全局行为-->
+    <settings>
+        <!--设置MyBatis打印日志在控制台-->
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+    </settings>
+    <!--环境配置：数据库连接信息【default与id相匹配】-->
+    <environments default="mydev">
+        <!--【id】唯一值-->
+        <environment id="mydev">
+            <!--【事务管理器】MyBatis的事务类型，JDBC中Connection对象的commit，rollback的事务处理-->
+            <transactionManager type="JDBC"/>
+            <!--数据源/连接数据库 使用数据库连接池-->
+            <dataSource type="POOLED">
+                <!--数据库驱动-->
+                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <!--数据库url-->
+                <property name="url" value="jdbc:mysql://localhost:3306/ssm"/>
+                <!--所访问数据库用户及密码-->
+                <property name="username" value="root"/>
+                <property name="password" value="960727"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <!--SQL mapper的位置-->
+    <mappers>
+        <!--一个[mapper]指定一个文件的位置【类路径：target/classes】-->
+        <mapper resource="com/bjpowenode/dao/studentDao.xml"/>
+    </mappers>
+</configuration>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- @-3
+【指定约束文件】
+【作用：限制/检查本文件中出现的标签，属性所符合MyBatis的要求】
+【约束文件名称】mybatis-3-mapper.dtd【扩展名为.dtd】
+-->
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--创建MyBatis使用配置文件【SQL映射文件】
+ 【写SQL语句】，一般一张表对应一个映射文件,
+ 由MyBatis执行-->
+
+<!--
+<Mapper>【映射】是当前文件的根标签。是必须存在的。
+其属性【namespace命名空间，是唯一值，并可自定义 的字符串】
+     【要求使用dao层 接口全限定名称】
+            特定标签标示 对数据库的特定操作
+<select>【查询】
+    【ID】属性是执行其操作的唯一标示
+    【resultType】SQL执行后的结果类型，遍历[ResultSet]所得JAVA对象的类型
+<update>【更新】
+<insert>【插入】
+<delete>【删除】
+-->
+<mapper namespace="com.bjpowenode.dao.StudentDao">
+    <!--查询操作-->
+    <select id="selectStudents" resultType="com.bjpowenode.entity.Student">
+        select *
+        from student
+        order by id
+    </select>
+    <!--插入操作-->
+    <insert id="insertStudents">
+        insert into student
+        values (#{id}, #{name}, #{email}, #{age})
+    </insert>
+</mapper>

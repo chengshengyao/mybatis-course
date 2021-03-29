@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bjpowernode.style.dao.DeptDao">
+
+    <resultMap type="com.bjpowernode.style.entity.Dept" id="DeptMap">
+        <result property="deptno" column="DEPTNO" jdbcType="INTEGER"/>
+        <result property="dname" column="DNAME" jdbcType="VARCHAR"/>
+        <result property="loc" column="LOC" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="DeptMap">
+        select DEPTNO,
+               DNAME,
+               LOC
+        from bjpowernode.dept
+        where DEPTNO = #{deptno}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="DeptMap">
+        select DEPTNO,
+               DNAME,
+               LOC
+        from bjpowernode.dept limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="DeptMap">
+        select
+        DEPTNO, DNAME, LOC
+        from bjpowernode.dept
+        <where>
+            <if test="deptno != null">
+                and DEPTNO = #{deptno}
+            </if>
+            <if test="dname != null and dname != ''">
+                and DNAME = #{dname}
+            </if>
+            <if test="loc != null and loc != ''">
+                and LOC = #{loc}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="deptno" useGeneratedKeys="true">
+        insert into bjpowernode.dept(DNAME, LOC)
+        values (#{dname}, #{loc})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="deptno" useGeneratedKeys="true">
+        insert into bjpowernode.dept(DNAME, LOC)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.dname}, #{entity.loc})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="deptno" useGeneratedKeys="true">
+        insert into bjpowernode.dept(DNAME, LOC)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.dname}, #{entity.loc})
+        </foreach>
+        on duplicate key update
+        DNAME = values(DNAME) , LOC = values(LOC)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update bjpowernode.dept
+        <set>
+            <if test="dname != null and dname != ''">
+                DNAME = #{dname},
+            </if>
+            <if test="loc != null and loc != ''">
+                LOC = #{loc},
+            </if>
+        </set>
+        where DEPTNO = #{deptno}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete
+        from bjpowernode.dept
+        where DEPTNO = #{deptno}
+    </delete>
+
+</mapper>

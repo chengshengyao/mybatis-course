@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="ch07-mybatis-generator-test" />
+        <module name="ch03-mybatis-dao-proxy" />
+        <module name="ch02-mybatis-dao" />
+        <module name="ch05-mybatis-return-result" />
+        <module name="ch04-mybatis-parameter" />
+        <module name="ch06-dynamic-sql" />
+        <module name="ch01-hello-mybatis" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="ch01-hello-mybatis" target="8" />
+      <module name="ch02-mybatis-dao" target="8" />
+      <module name="ch03-mybatis-dao-proxy" target="8" />
+      <module name="ch04-mybatis-parameter" target="8" />
+      <module name="ch05-mybatis-return-result" target="8" />
+      <module name="ch06-dynamic-sql" target="8" />
+      <module name="ch07-mybatis-generator-test" target="8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
